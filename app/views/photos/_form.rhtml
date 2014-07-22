@@ -1,0 +1,26 @@
+<%= error_messages_for 'photo' %>
+
+<!--[form:photo]-->
+<p><label for="photo_created_at">Created at</label><br/>
+<%= datetime_select 'photo', 'created_at'  %></p>
+
+<p><label for="photo_filename">Filename</label><br/>
+<%= text_field 'photo', 'filename'  %></p>
+
+<p><label for="photo_thumbnail">Thumbnail</label><br/>
+<%= text_field 'photo', 'thumbnail'  %></p>
+
+<p><label for="photo_description">Description</label><br/>
+<%= text_field 'photo', 'description'  %></p>
+                      
+<p>
+  <label for="categories">Categories:</label><br/>
+  <select id="categories" name="categories[]" multiple="multiple" 
+          size="10" style="width:250px;">
+    <%= options_from_collection_for_select(@all_categories, 
+                                           :id, :long_name, @selected) %>
+  </select>
+</p>
+                      
+<!--[eoform:photo]-->
+

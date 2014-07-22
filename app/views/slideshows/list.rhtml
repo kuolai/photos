@@ -1,0 +1,34 @@
+<%= link_to 'New Slideshow', :action => 'new' %>
+<br/>
+<div id="slideshow-summaries">
+   <% for slideshow in @slideshows %>
+      <div id="slideshow-summary">
+         <div id='slideshow-caption'>
+            <%= slideshow.name %> 
+            <small>(<%= slideshow.slides.size %> slides)</small>
+         </div>
+
+         <div id="slideshow-thumbnails">
+            <%= thumbnail_tag slideshow.slides[0] %>
+            <%= thumbnail_tag slideshow.slides[1] %>
+            <%= thumbnail_tag slideshow.slides[2] %>
+            &nbsp;<strong>. . .</strong>
+         </div>
+
+         <div id="slideshow-controls">
+            <small>
+              <%= link_to 'Play',    :action => 'show',    :id => slideshow %>
+              <%= link_to 'Edit',    :action => 'edit',    :id => slideshow %>
+              <%= link_to 'Delete',  :action => 'destroy', :id => slideshow %>
+            </small>
+         </div>
+      </div>
+      <br/>
+   <% end %>
+
+   <%= link_to 'Previous page', 
+       { :page => @slideshow_pages.current.previous } if @slideshow_pages.current.previous %>
+               
+   <%= link_to 'Next page', 
+       { :page => @slideshow_pages.current.next } if @slideshow_pages.current.next %>
+</div>

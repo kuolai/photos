@@ -1,0 +1,59 @@
+<h1>Editing slideshow</h1>
+
+<div id='slideshow-contents'>
+  <p style='text-align: center;'><b>Slideshow Photos</b></p>
+  <div id='slideshow-thumbs'>
+    <%= render :partial => 'show_slides_draggable' %>
+  </div>
+</div>
+
+<div id='slideshow-photo-picker'>
+  <p style='text-align: center;'><b>Unused Photos</b></p>
+  <div id='slideshow-photos'>
+    <%= render :partial => 'photo_picker' %>
+  </div>
+</div>
+
+<div id='slideshow-attributes'>
+  <p><%= link_to 'Play this Slideshow', :action => 'show', :id => @slideshow %></p>
+    <p>
+    <label for="category_id">Filter "Unused Photos" on this Category</label><br/>
+    <%= collection_select(:category, :id, @all_categories, :id, :long_name) %>
+    <%= observe_field(:category_id,
+                 :frequency => 2.0,
+                 :update => 'slideshow-photos',
+                 :url => { :action => 'change_filter'}, 
+                 :with => 'category_id' ) %>
+  </p>
+  <div style='border: thin solid; padding-left: 1em;'>
+    <p style='text-align: center;'><b>Attributes</b></p>
+    <%= start_form_tag :action => 'update', :id => @slideshow %>
+      <%= render :partial => 'form' %>
+      <%= submit_tag 'Save Attributes' %>
+    <%= end_form_tag %>
+  </div>
+  <p>
+    <b>Hint:</b> Drag and drop photos between the 
+    two lists to add and remove photos from the
+    slideshow. Drag photos within the slideshow to
+    rearrange their order.
+</div>
+
+<%= drop_receiving_element("slideshow-contents", 
+          :update => "slideshow-thumbs", 
+          :url => {:action => "add_photo" },
+          :accept => "photos",
+          :droponempty => "true",
+          :loading => visual_effect(:fade),
+          :complete => visual_effect(:highlight, 'sortable_thumbs')  
+          ) %>
+
+<%= drop_receiving_element("slideshow-photo-picker", 
+          :update => "slideshow-photos", 
+          :url => {:action => "remove_slide" },
+          :accept => "slides",
+          :droponempty => "true",
+          :loading => visual_effect(:fade),
+          :complete => visual_effect(:highlight, 'slideshow-photos')  
+          ) %>
+          

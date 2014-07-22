@@ -1,0 +1,20 @@
+development:
+  adapter: mysql
+  database: photos_development
+  username: root
+  password:
+  host: localhost
+
+test:
+  adapter: mysql
+  database: photos_test
+  username: root
+  password:
+  host: localhost
+
+production:
+  adapter: mysql
+  database: photos_production
+  username: root
+  password: 
+  host: localhost

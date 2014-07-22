@@ -1,0 +1,7 @@
+<% for photo in @photos %>
+    <%= image_tag("photos/#{photo.thumbnail}", 
+                   :style => "vertical-align: middle",
+                   :id => "photo_#{photo.id}",
+                   :class => "photos") %>
+    <%= draggable_element "photo_#{photo.id}", :revert => true %>
+<% end %>

@@ -1,0 +1,26 @@
+<html>
+<head>
+  <title>Photo Share</title>
+  <%= javascript_include_tag 'prototype', 'effects', 'dragdrop' %>
+  <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag 'photos' %>
+  <%= stylesheet_link_tag 'slideshows' %>
+</head>
+<body>
+  <div>
+  <p class="navbar">
+    &nbsp;
+    <%= link_to 'Photos', :controller => 'photos', :action => 'list' %>
+    &nbsp;
+    <%= link_to 'Categories', :controller => 'categories', :action => 'list' %>
+    &nbsp;
+    <%= link_to 'Slideshows', :controller => 'slideshows', :action => 'list' %>
+  </p>
+  </div>
+
+  <p style="color: green"><%= flash[:notice] %></p>
+
+  <%= @content_for_layout %>
+
+</body>
+</html>

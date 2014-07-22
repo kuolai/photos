@@ -1,0 +1,30 @@
+<h1>Listing photos</h1>
+
+<table>
+<% for photo in @photos %>
+  <tr>
+    <td>
+      <%= link_to(image_tag("photos/#{photo.thumbnail}", 
+                            :size => '75x56', 
+                            :border => 1,
+                            :id => 'thumbnail'), 
+                  url_for(:action => 'show', :id => photo)
+                 ) 
+      %>
+    </td>
+    <td>
+      <%=h photo.filename %>
+      <br/>
+      <%= link_to 'delete me', { :action => 'destroy', :id => photo }, 
+                                 :confirm => 'Are you sure?' %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @photo_pages.current.previous } if @photo_pages.current.previous %>
+<%= link_to 'Next page', { :page => @photo_pages.current.next } if @photo_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New photo', :action => 'new' %>
